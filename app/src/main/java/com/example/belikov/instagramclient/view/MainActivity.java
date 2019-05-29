@@ -1,10 +1,14 @@
 package com.example.belikov.instagramclient.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,22 +21,39 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.belikov.instagramclient.R;
 import com.example.belikov.instagramclient.model.MyData;
 import com.example.belikov.instagramclient.presenter.MainPresenter;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends MvpAppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, MainView {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private MyAdapter myAdapter;
-    private MainPresenter mainPresenter;
-    private Toolbar toolbar;
-    private FloatingActionButton fab;
-    private DrawerLayout drawer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
-    private NavigationView navigationView;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+
+    @InjectPresenter
+    MainPresenter presenter;
+
+    @ProvidePresenter
+    public MainPresenter providePresenter() {
+        return new MainPresenter();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +64,23 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void setTextView(String s) {
+       Log.d("MainActivity", s);
+    }
+
+    @Override
+    public void getPosition(int pos) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("Pos", pos);
+        startActivity(intent);
+    }
+
+
     private void initialization() {
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        mainPresenter = new MainPresenter();
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,13 +89,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -72,14 +100,11 @@ public class MainActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        myAdapter = new MyAdapter(mainPresenter.getRecyclerMainPresenter());
+        myAdapter = new MyAdapter(presenter.getRecyclerMainPresenter());
         recyclerView.setAdapter(myAdapter);
 
     }
 
-    public void cardClick(View view){
-        mainPresenter.clickCount();
-    }
 
     @Override
     public void onBackPressed() {
@@ -136,6 +161,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
 }
