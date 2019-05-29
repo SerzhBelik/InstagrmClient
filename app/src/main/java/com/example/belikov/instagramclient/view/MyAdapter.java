@@ -3,6 +3,7 @@ package com.example.belikov.instagramclient.view;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,16 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements IViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements IViewHolder, View.OnClickListener
+
+    {
         private TextView textView;
         private ImageView imageView;
         private int pos = 0;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             textView = itemView.findViewById(R.id.text_view);
             imageView = itemView.findViewById(R.id.image_view);
         }
@@ -69,5 +73,10 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             return pos;
         }
 
+        @Override
+        public void onClick(View v) {
+//            Log.d("Adapter", "" + pos);
+            mainPresenter.onCardClick(pos);
+        }
     }
 }
