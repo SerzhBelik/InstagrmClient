@@ -1,7 +1,7 @@
 package com.example.belikov.instagramclient.view;
 
 public interface IViewHolder {
-    void setImage(int pos);
-    void setText(String text);
+//    void setText(String text);
     int getPos();
+    void setImage(String url);
 }

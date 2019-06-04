@@ -36,7 +36,9 @@ public class MainActivity extends MvpAppCompatActivity
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    private MyAdapter myAdapter;
+//    private MyAdapter myAdapter;
+    private MainAdapter mainAdapter;
+    private static final String TAG = "MainActivity";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.fab)
@@ -46,6 +48,7 @@ public class MainActivity extends MvpAppCompatActivity
     private ActionBarDrawerToggle toggle;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+
 
     @InjectPresenter
     MainPresenter presenter;
@@ -64,16 +67,22 @@ public class MainActivity extends MvpAppCompatActivity
 
     }
 
+//    @Override
+//    public void setTextView(String s) {
+//       Log.d("MainActivity", s);
+//    }
+
     @Override
-    public void setTextView(String s) {
-       Log.d("MainActivity", s);
+    public void getUrl(String url) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("URL", url);
+        startActivity(intent);
     }
 
     @Override
-    public void getPosition(int pos) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("Pos", pos);
-        startActivity(intent);
+    public void updateRecyclerView() {
+        Log.d(TAG, "updateRecyclerView: ");
+        mainAdapter.notifyDataSetChanged();
     }
 
 
@@ -97,8 +106,8 @@ public class MainActivity extends MvpAppCompatActivity
         recyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        myAdapter = new MyAdapter(presenter.getRecyclerMainPresenter());
-        recyclerView.setAdapter(myAdapter);
+        mainAdapter = new MainAdapter(this, presenter.getRecyclerMainPresenter());
+        recyclerView.setAdapter(mainAdapter);
 
     }
 

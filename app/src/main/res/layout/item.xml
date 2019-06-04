@@ -34,12 +34,12 @@
             android:layout_height="200dp"
             android:src="@drawable/fruit1"/>
 
-        <TextView
-            android:id="@+id/text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="Ананас"/>
+        <!--<TextView-->
+            <!--android:id="@+id/text_view"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="18dp"-->
+            <!--android:text="Ананас"/>-->
 
     </LinearLayout>
 

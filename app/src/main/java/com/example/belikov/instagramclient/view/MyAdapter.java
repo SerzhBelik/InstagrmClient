@@ -45,32 +45,37 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder implements IViewHolder, View.OnClickListener
 
     {
-        private TextView textView;
+//        private TextView textView;
         private ImageView imageView;
         private int pos = 0;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            textView = itemView.findViewById(R.id.text_view);
+//            textView = itemView.findViewById(R.id.text_view);
             imageView = itemView.findViewById(R.id.image_view);
         }
 
 
-        @Override
-        public void setImage(int imageId) {
-            imageView.setImageResource(imageId);
-
-        }
-
-        @Override
-        public void setText(String text) {
-            textView.setText(text);
-        }
+//        @Override
+//        public void setImage(int imageId) {
+//            imageView.setImageResource(imageId);
+//
+//        }
+//
+//        @Override
+//        public void setText(String text) {
+//            textView.setText(text);
+//        }
 
         @Override
         public int getPos() {
             return pos;
+        }
+
+        @Override
+        public void setImage(String url) {
+
         }
 
         @Override
