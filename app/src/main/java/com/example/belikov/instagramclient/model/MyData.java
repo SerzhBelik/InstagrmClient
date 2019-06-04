@@ -1,9 +1,11 @@
 package com.example.belikov.instagramclient.model;
 
+import com.example.belikov.instagramclient.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class Data {
+public class MyData {
     private List<String> fruitList;
     private List<String> vegetablesList;
     private List<String> natureList;
@@ -11,6 +13,16 @@ class Data {
     private int[] fruit;
     private int[] vegetables;
     private int[] nature;
+
+    public int getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(int clickCount) {
+        this.clickCount = clickCount;
+    }
+
+    private int clickCount = 0;
 
     public int[] getFruit() {
         return fruit;
@@ -24,7 +36,7 @@ class Data {
         return nature;
     }
 
-    public Data(){
+    public MyData(){
         fruitList = new ArrayList<>();
         fruitList.add("Ананас");
         fruitList.add("Апельсин");
@@ -48,7 +60,7 @@ class Data {
         natureList.add("Море");
         natureList.add("Долина");
 //
-//        fruit = new int[]{R.drawable.fruit1, R.drawable.fruit2, R.drawable.fruit3, R.drawable.fruit4};
+        fruit = new int[]{R.drawable.fruit1,R.drawable.fruit2, R.drawable.fruit3, R.drawable.fruit4};
 //        vegetables = new int[]{R.drawable.veg1, R.drawable.veg2, R.drawable.veg3, R.drawable.veg4};
 //        nature = new int[]{R.drawable.nat1, R.drawable.nat2, R.drawable.nat3, R.drawable.nat4};
 
