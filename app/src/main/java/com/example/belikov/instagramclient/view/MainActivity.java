@@ -36,7 +36,6 @@ public class MainActivity extends MvpAppCompatActivity
 
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-//    private MyAdapter myAdapter;
     private MainAdapter mainAdapter;
     private static final String TAG = "MainActivity";
     @BindView(R.id.toolbar)
@@ -48,7 +47,6 @@ public class MainActivity extends MvpAppCompatActivity
     private ActionBarDrawerToggle toggle;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-
 
     @InjectPresenter
     MainPresenter presenter;
@@ -67,11 +65,6 @@ public class MainActivity extends MvpAppCompatActivity
 
     }
 
-//    @Override
-//    public void setTextView(String s) {
-//       Log.d("MainActivity", s);
-//    }
-
     @Override
     public void getUrl(String url) {
         Intent intent = new Intent(this, DetailActivity.class);
@@ -84,7 +77,6 @@ public class MainActivity extends MvpAppCompatActivity
         Log.d(TAG, "updateRecyclerView: ");
         mainAdapter.notifyDataSetChanged();
     }
-
 
     private void initialization() {
         setContentView(R.layout.activity_main);

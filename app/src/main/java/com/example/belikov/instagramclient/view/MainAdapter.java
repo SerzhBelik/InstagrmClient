@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.example.belikov.instagramclient.R;
 import com.example.belikov.instagramclient.model.GlideLoader;
 import com.example.belikov.instagramclient.presenter.IRecyclerMainPresenter;
@@ -52,9 +50,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
         @BindView(R.id.image_view)
         ImageView imageView;
-//
-//        @BindView(R.id.text_view)
-//        TextView textView;
 
         public MainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,12 +61,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         public void setImage(String url) {
             glideLoader.loadImage(url, imageView);
         }
-
-
-//        @Override
-//        public void setText(String text) {
-//
-//        }
 
         @Override
         public int getPos() {

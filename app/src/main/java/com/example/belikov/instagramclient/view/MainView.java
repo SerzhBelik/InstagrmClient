@@ -7,10 +7,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 public interface MainView  extends MvpView {
 
     @StateStrategyType(value = SkipStrategy.class)
-//    void setTextView(String s);
-//    void getPosition(int pos);
-
     void updateRecyclerView();
-
     void getUrl(String url);
 }

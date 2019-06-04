@@ -6,7 +6,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 public interface DetailView extends MvpView {
     @StateStrategyType(value = SkipStrategy.class)
-//    void setImage(int id);
     void setImage(String url);
-//    void setText(String s);
 }
