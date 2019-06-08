@@ -8,5 +8,5 @@ public interface MainView  extends MvpView {
 
     @StateStrategyType(value = SkipStrategy.class)
     void updateRecyclerView();
-    void getUrl(String url);
+    void getUrlPos(int pos);
 }

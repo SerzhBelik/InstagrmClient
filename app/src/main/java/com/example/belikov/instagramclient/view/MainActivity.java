@@ -66,9 +66,9 @@ public class MainActivity extends MvpAppCompatActivity
     }
 
     @Override
-    public void getUrl(String url) {
+    public void getUrlPos(int pos) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("URL", url);
+        intent.putExtra("POS", pos);
         startActivity(intent);
     }
 
