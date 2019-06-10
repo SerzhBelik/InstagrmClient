@@ -8,22 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.example.belikov.instagramclient.R;
+import com.example.belikov.instagramclient.app.App;
 import com.example.belikov.instagramclient.model.GlideLoader;
 import com.example.belikov.instagramclient.presenter.IRecyclerMainPresenter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
+    @Inject
+    GlideLoader glideLoader;
     private static final String TAG = "MainAdapter";
-
     private IRecyclerMainPresenter iRecyclerMain;
-    private GlideLoader glideLoader;
+    private static Context context;
 
     public MainAdapter(Context context, IRecyclerMainPresenter iRecyclerMain) {
         this.iRecyclerMain = iRecyclerMain;
-        glideLoader = new GlideLoader(context);
+        App.getAppComponent().inject(this);
+        this.context = context;
     }
 
     @NonNull
@@ -59,6 +64,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
         @Override
         public void setImage(String url) {
+            glideLoader.setContext(MainAdapter.context);
             glideLoader.loadImage(url, imageView);
         }
 
@@ -72,5 +78,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             Log.d("Adapter", "" + position);
             iRecyclerMain.onCardClick(position);
         }
+
     }
 }

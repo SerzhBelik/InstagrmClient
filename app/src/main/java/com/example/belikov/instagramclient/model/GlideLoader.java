@@ -13,6 +13,14 @@ public class GlideLoader {
         this.context = context;
     }
 
+    public GlideLoader(){
+
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     public void loadImage(String url, ImageView imageView){
         Glide
                 .with(context)

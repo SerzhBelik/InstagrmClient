@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.belikov.instagramclient.App;
+import com.example.belikov.instagramclient.app.App;
 import com.example.belikov.instagramclient.model.MyData;
 import com.example.belikov.instagramclient.model.entity.Hit;
 import com.example.belikov.instagramclient.model.entity.HitDao;
@@ -18,27 +18,25 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class DetailPresenter extends MvpPresenter<DetailView> {
 
-    private MyData data;
-    private DetailActivity activity;
+//    private DetailActivity activity;
     private HitDao hitDao = App.getAppDatabase().hitDao();
     private static final String TAG = "Detail Presenter";
     private List<Hit> hitList;
 
-    public DetailPresenter(DetailActivity activity){
-        data = new MyData();
-        this.activity = activity;
+    public DetailPresenter(){
+//        this.activity = activity;
     }
 
     @Override
     protected void onFirstViewAttach() {
 
         Log.d("Presenter", "Attach");
-        attachView(activity);
+//        attachView(activity);
     }
 
-    public void setCardView(){
+    public void setCardView(int pos){
         onFirstViewAttach();
-        int pos = activity.getIntent().getIntExtra("POS", 0);
+
         getUrl(pos);
         Log.d(TAG, "pos = " + pos);
 

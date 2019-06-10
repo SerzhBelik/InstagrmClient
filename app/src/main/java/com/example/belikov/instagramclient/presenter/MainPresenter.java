@@ -1,13 +1,12 @@
 package com.example.belikov.instagramclient.presenter;
 
 import android.util.Log;
-
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.belikov.instagramclient.App;
+import com.example.belikov.instagramclient.app.App;
 import com.example.belikov.instagramclient.model.entity.Hit;
 import com.example.belikov.instagramclient.model.entity.HitDao;
 import com.example.belikov.instagramclient.model.entity.Photo;
@@ -15,6 +14,9 @@ import com.example.belikov.instagramclient.model.retrofit.ApiHelper;
 import com.example.belikov.instagramclient.view.IViewHolder;
 import com.example.belikov.instagramclient.view.MainView;
 import java.util.List;
+
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -22,7 +24,8 @@ import io.reactivex.schedulers.Schedulers;
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainView> {
 
-    private ApiHelper apiHelper;
+    @Inject
+    ApiHelper apiHelper;
     private List<Hit> hitList;
     private static  final String TAG = "Main presenter";
     private RecyclerMainPresenter recyclerMain;
@@ -31,7 +34,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     public MainPresenter() {
         Log.d(TAG, "MainPresenter: ");
         recyclerMain = new RecyclerMainPresenter();
-        apiHelper = new ApiHelper();
+        App.getAppComponent().inject(this);
     }
 
             @Override

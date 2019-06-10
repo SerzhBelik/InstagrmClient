@@ -13,14 +13,18 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.belikov.instagramclient.R;
+import com.example.belikov.instagramclient.app.App;
 import com.example.belikov.instagramclient.model.GlideLoader;
 import com.example.belikov.instagramclient.presenter.DetailPresenter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends MvpAppCompatActivity implements DetailView {
-    private GlideLoader glideLoader = new GlideLoader(this);
+    @Inject
+    GlideLoader glideLoader;
     @BindView(R.id.card_view)
     CardView cardView;
     @BindView(R.id.image_view)
@@ -31,7 +35,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
 
     @ProvidePresenter
     public DetailPresenter providePresenter(){
-        return new DetailPresenter(this);
+        return new DetailPresenter();
     }
 
     @Override
@@ -39,13 +43,19 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
-        presenter.setCardView();
+        App.getAppComponent().inject(this);
+        presenter.setCardView(getPos());
 
+    }
+
+    private int getPos() {
+        return getIntent().getIntExtra("POS", 0);
     }
 
     @Override
     public void setImage(String url) {
         imageView.setLayoutParams(new LinearLayout.LayoutParams(600, 600));
+        glideLoader.setContext(this);
         glideLoader.loadImage(url, imageView);
     }
 
