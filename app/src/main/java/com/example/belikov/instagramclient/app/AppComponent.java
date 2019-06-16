@@ -1,5 +1,6 @@
 package com.example.belikov.instagramclient.app;
 
+import com.example.belikov.instagramclient.presenter.DetailPresenter;
 import com.example.belikov.instagramclient.presenter.MainPresenter;
 import com.example.belikov.instagramclient.view.DetailActivity;
 import com.example.belikov.instagramclient.view.MainAdapter;
@@ -17,9 +18,7 @@ public interface AppComponent {
     void inject(MainPresenter mainPresenter);
 
     void inject(DetailActivity activity);
-//    void inject(DaggerPresenter daggerPresenter);
-//
-//    void inject(RedDagger redDagger);
-//
-//    void inject(WhiteDagger whiteDagger);
+
+    void inject(DetailPresenter detailPresenter);
+
 }

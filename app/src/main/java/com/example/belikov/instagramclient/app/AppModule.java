@@ -3,6 +3,7 @@ package com.example.belikov.instagramclient.app;
 import android.app.Application;
 
 import com.example.belikov.instagramclient.model.GlideLoader;
+import com.example.belikov.instagramclient.model.entity.HitDao;
 import com.example.belikov.instagramclient.model.retrofit.ApiHelper;
 import javax.inject.Singleton;
 
@@ -28,6 +29,12 @@ public class AppModule {
     @Provides
     ApiHelper provideApiHelper(){
         return new ApiHelper();
+    }
+
+    @Singleton
+    @Provides
+    HitDao provideHitDao(){
+        return App.getAppDatabase().hitDao();
     }
 
 }

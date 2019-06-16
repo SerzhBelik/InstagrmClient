@@ -14,9 +14,7 @@ import com.example.belikov.instagramclient.model.retrofit.ApiHelper;
 import com.example.belikov.instagramclient.view.IViewHolder;
 import com.example.belikov.instagramclient.view.MainView;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -26,15 +24,16 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     @Inject
     ApiHelper apiHelper;
+    @Inject
+    HitDao hitDao;
     private List<Hit> hitList;
     private static  final String TAG = "Main presenter";
     private RecyclerMainPresenter recyclerMain;
-    private HitDao hitDao = App.getAppDatabase().hitDao();
 
     public MainPresenter() {
         Log.d(TAG, "MainPresenter: ");
         recyclerMain = new RecyclerMainPresenter();
-        App.getAppComponent().inject(this);
+
     }
 
             @Override
@@ -56,28 +55,29 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     }
 
-    private void getPhotoFromeDatabase() {
+    public void getPhotoFromeDatabase() {
 
         Disposable disposable = hitDao.getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(hits -> {
                    hitList = hits;
                    Log.d(TAG, "from DB");
-                   getViewState().updateRecyclerView();
+                   getViewState().updateRecyclerView(hitList.size());
                 });
     }
 
 
-    private void getPhotoFromJson() {
+    public void getPhotoFromJson() {
+        Log.d(TAG, "!!!");
                 Observable<Photo> single = apiHelper.requestServer();
         Disposable disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(photos -> {
             hitList = photos.hits;
-            Single<Long> single1= insertIntoDB();
-            single1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(l -> {
-                        Log.d(TAG, "insert " + l + " elements");
-                    });
-            Log.d(TAG, "from Json");
-            getViewState().updateRecyclerView();
+//            Single<Long> single1= insertIntoDB();
+//            single1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(l -> {
+//                        Log.d(TAG, "insert " + l + " elements");
+//                    });
+//            Log.d(TAG, "from Json");
+            getViewState().updateRecyclerView(hitList.size());
         }, throwable -> {
             Log.e(TAG, "onError " + throwable);
         });
@@ -85,7 +85,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     private Single<Long> insertIntoDB() {
         return Single.create((SingleOnSubscribe<Long>) emitter -> {
-            Log.d(TAG, "adding");
+            Log.d(TAG, "adding " + hitList.size());
             hitDao.insertList(hitList);
             emitter.onSuccess(new Long(hitList.size()));
         }).subscribeOn(Schedulers.io());
