@@ -71,12 +71,12 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 Observable<Photo> single = apiHelper.requestServer();
         Disposable disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(photos -> {
             hitList = photos.hits;
-//            Single<Long> single1= insertIntoDB();
-//            single1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(l -> {
-//                        Log.d(TAG, "insert " + l + " elements");
-//                    });
-//            Log.d(TAG, "from Json");
+            Single<Long> single1= insertIntoDB();
+            single1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(l -> {
+                        Log.d(TAG, "insert " + l + " elements");
+                    });
+            Log.d(TAG, "from Json");
             getViewState().updateRecyclerView(hitList.size());
         }, throwable -> {
             Log.e(TAG, "onError " + throwable);

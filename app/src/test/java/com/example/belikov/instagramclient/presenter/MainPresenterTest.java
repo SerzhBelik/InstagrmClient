@@ -50,8 +50,7 @@ public class MainPresenterTest {
     public void before() {
         MockitoAnnotations.initMocks(this);
         presenter = Mockito.spy(new MainPresenter());
-//        hitList.add(new Hit());
-//        System.out.println(hitList.size());
+
 
     }
 
@@ -82,7 +81,7 @@ public class MainPresenterTest {
         component.inject(presenter);
         presenter.attachView(mainView);
         presenter.getPhotoFromJson();
-        Mockito.verify(mainView).updateRecyclerView(0);
+        Mockito.verify(mainView).updateRecyclerView(1);
 
     }
 
