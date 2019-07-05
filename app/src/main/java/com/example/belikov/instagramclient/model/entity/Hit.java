@@ -20,4 +20,23 @@ public class Hit {
     @Expose
     @SerializedName("user")
     public String user;
+
+    @Expose
+    @SerializedName("likes")
+    public Integer likes;
+
+    @Expose
+    @SerializedName("favorites")
+    public Integer favorites;
+
+    @Expose
+    @SerializedName("comments")
+    public Integer comments;
+
+    @Expose
+    public boolean isLiked = false;
+
+    @Expose
+    public boolean isFavorite = false;
+
 }

@@ -66,9 +66,10 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
 
     public void getPhotoFromJson() {
-        Log.d(TAG, "!!!");
+//        Log.d(TAG, "!!!");
                 Observable<Photo> single = apiHelper.requestServer();
         Disposable disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(photos -> {
+            Log.d(TAG, "hit list " + photos.hits.size());
             hitList = photos.hits;
             Single<Long> single1= insertIntoDB();
             single1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

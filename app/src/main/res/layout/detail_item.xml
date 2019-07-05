@@ -35,17 +35,12 @@
                 android:layout_height="200dp"
                 android:src="@drawable/fruit1"/>
 
-            <!--<TextView-->
-            <!--android:id="@+id/text_view"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textSize="18dp"-->
-            <!--android:text="Ананас"/>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/description"
@@ -59,17 +54,44 @@
                     android:id="@+id/likePhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:src="@drawable/ic_favorite_border_black_48dp"
                     android:layout_weight="1"
                     android:onClick="onClickLike"/>
 
-                <ImageView
-                    android:id="@+id/favoritePhoto"
+                <TextView
+                    android:id="@+id/likes_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_border_black_24dp"
+                    android:text="0"
+                    android:textSize="16dp"/>
+
+                <ImageView
+                android:id="@+id/favoritePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_star_border_black_48dp"
+                android:layout_weight="1"
+                android:onClick="onClickFavorite"/>
+                <TextView
+                    android:id="@+id/favorite_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="16dp"/>
+
+                <ImageView
+                    android:id="@+id/comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_mode_comment_black_48dp"
                     android:layout_weight="1"
-                    android:onClick="onClickFavorite"/>
+                    />
+                <TextView
+                    android:id="@+id/comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="16dp"/>
             </LinearLayout>
 
 
