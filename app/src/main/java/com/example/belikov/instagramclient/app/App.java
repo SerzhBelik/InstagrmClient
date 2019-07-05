@@ -4,7 +4,11 @@ package com.example.belikov.instagramclient.app;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.belikov.instagramclient.model.AppDatabase;
+import com.squareup.leakcanary.LeakCanary;
+
+import io.fabric.sdk.android.Fabric;
 
 public class App extends Application {
 
@@ -17,6 +21,11 @@ public class App extends Application {
 
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "room_database").build();
         appComponent = generateAppComponent();
+        Fabric.with(this, new Crashlytics());
+        if (LeakCanary.isInAnalyzerProcess(this)){
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     public static AppDatabase getAppDatabase(){

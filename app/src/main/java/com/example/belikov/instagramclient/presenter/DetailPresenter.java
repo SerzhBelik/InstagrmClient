@@ -46,6 +46,7 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
                 .subscribe(hits -> {
                     hitList = hits;
                     getViewState().setImage(hitList.get(0).webformatURL);
+                    getViewState().setUser(hitList.get(0).user);
                 });
 
     }

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -12,8 +14,14 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexEnabled false
+            shrinkResources false
         }
     }
     compileOptions {
@@ -62,4 +70,16 @@ dependencies {
     androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.18'
     testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.18'
     testImplementation 'com.google.dagger:dagger-compiler:2.18'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
+
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+    // https://mvnrepository.com/artifact/com.crashlytics.sdk.android/crashlytics
+//    implementation group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: '2.6.8'
+//    prodCompile 'com.crashlytics.sdk.android:crashlytics:2.6.8'
+
+
 }

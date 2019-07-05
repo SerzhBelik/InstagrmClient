@@ -14,6 +14,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -24,6 +27,7 @@ import com.example.belikov.instagramclient.presenter.MainPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends MvpAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainView {
@@ -74,9 +78,29 @@ public class MainActivity extends MvpAppCompatActivity
         mainAdapter.notifyDataSetChanged();
     }
 
+//    @OnClick(R.id.like)
+    public void likeClick(){
+//        imageViewLike.setImageResource(R.drawable.ic_favorite_black_24dp);
+        Log.d(TAG, "Like");
+    }
+
+//    public void onClickLike(View view){
+////        ImageView imageView = findViewById(R.id.likePhoto);
+//        ImageView imageView = (ImageView)view;
+//        imageView.setImageResource(R.drawable.ic_favorite_black_24dp);
+//    }
+
+//    public void onClickFavorite(View view){
+////        ImageView imageView = findViewById(R.id.likePhoto);
+//        ImageView imageView = (ImageView)view;
+//        imageView.setImageResource(R.drawable.ic_star_black_24dp);
+//    }
+
+
     private void initialization() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
         fab.setOnClickListener(view -> {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -155,6 +179,8 @@ public class MainActivity extends MvpAppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 

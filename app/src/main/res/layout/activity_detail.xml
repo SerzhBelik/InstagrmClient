@@ -7,7 +7,7 @@
     tools:context=".view.DetailActivity">
 
     <include
-        layout="@layout/item"
+        layout="@layout/detail_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

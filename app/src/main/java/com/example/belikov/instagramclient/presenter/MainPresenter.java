@@ -6,7 +6,6 @@ import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.belikov.instagramclient.app.App;
 import com.example.belikov.instagramclient.model.entity.Hit;
 import com.example.belikov.instagramclient.model.entity.HitDao;
 import com.example.belikov.instagramclient.model.entity.Photo;

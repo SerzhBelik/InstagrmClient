@@ -3,6 +3,7 @@ package com.example.belikov.instagramclient.view;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,6 +30,10 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
     CardView cardView;
     @BindView(R.id.image_view)
     ImageView imageView;
+    @BindView(R.id.description)
+    TextView textView;
+    @BindView(R.id.likePhoto)
+    ImageView imageViewLike;
 
     @InjectPresenter
     DetailPresenter presenter;
@@ -54,13 +59,30 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
 
     @Override
     public void setImage(String url) {
-        imageView.setLayoutParams(new LinearLayout.LayoutParams(600, 600));
+        imageView.setLayoutParams(new LinearLayout.LayoutParams(500, 500));
         glideLoader.setContext(this);
         glideLoader.loadImage(url, imageView);
+    }
+
+    @Override
+    public void setUser(String user) {
+        textView.setText(user);
     }
 
 
     public DetailView getView(){
         return this;
+    }
+
+    public void onClickLike(View view){
+//        ImageView imageView = findViewById(R.id.likePhoto);
+        ImageView imageView = (ImageView)view;
+        imageView.setImageResource(R.drawable.ic_favorite_black_24dp);
+    }
+
+    public void onClickFavorite(View view){
+//        ImageView imageView = findViewById(R.id.likePhoto);
+        ImageView imageView = (ImageView)view;
+        imageView.setImageResource(R.drawable.ic_star_black_24dp);
     }
 }

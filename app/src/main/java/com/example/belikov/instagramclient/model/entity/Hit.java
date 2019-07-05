@@ -16,4 +16,8 @@ public class Hit {
     @Expose
     @SerializedName("webformatURL")
     public String webformatURL;
+
+    @Expose
+    @SerializedName("user")
+    public String user;
 }
