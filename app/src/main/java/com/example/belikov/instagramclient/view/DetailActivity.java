@@ -118,16 +118,4 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
         presenter.favoritedPhoto();
     }
 
-
-//    public void onClickLike(View view){
-////        ImageView imageView = findViewById(R.id.likePhoto);
-//        ImageView imageView = (ImageView)view;
-//        imageView.setImageResource(R.drawable.ic_favorite_black_48dp);
-//    }
-//
-//    public void onClickFavorite(View view){
-////        ImageView imageView = findViewById(R.id.likePhoto);
-//        ImageView imageView = (ImageView)view;
-//        imageView.setImageResource(R.drawable.ic_star_black_48dp);
-//    }
 }
