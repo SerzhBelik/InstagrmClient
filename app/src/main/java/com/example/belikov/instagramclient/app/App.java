@@ -22,13 +22,13 @@ public class App extends Application {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "room_database").build();
         appComponent = generateAppComponent();
         Fabric.with(this, new Crashlytics());
-        if (LeakCanary.isInAnalyzerProcess(this)){
+        if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
     }
 
-    public static AppDatabase getAppDatabase(){
+    public static AppDatabase getAppDatabase() {
         return appDatabase;
     }
 

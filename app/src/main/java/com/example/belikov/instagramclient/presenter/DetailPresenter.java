@@ -9,7 +9,6 @@ import com.example.belikov.instagramclient.app.App;
 import com.example.belikov.instagramclient.model.entity.Hit;
 import com.example.belikov.instagramclient.model.entity.HitDao;
 import com.example.belikov.instagramclient.view.DetailView;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -28,7 +27,7 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
     private Hit hit;
     private int pos;
 
-    public DetailPresenter(){
+    public DetailPresenter() {
     }
 
     @Override
@@ -37,7 +36,7 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
         App.getAppComponent().inject(this);
     }
 
-    public void setCardView(int pos){
+    public void setCardView(int pos) {
         onFirstViewAttach();
         this.pos = pos;
         setView(pos);
@@ -55,14 +54,15 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
                     getViewState().setFavoriteCount(hit.favorites);
                     getViewState().setCommentCount(hit.comments);
                     if (hit.isLiked) getViewState().setLikeImage(R.drawable.ic_favorite_black_48dp);
-                    if (hit.isFavorite) getViewState().setFavoriteImage(R.drawable.ic_star_black_48dp);
+                    if (hit.isFavorite)
+                        getViewState().setFavoriteImage(R.drawable.ic_star_black_48dp);
                 });
 
     }
 
 
     public void likedPhoto() {
-        if(hit.isLiked){
+        if (hit.isLiked) {
             hit.isLiked = false;
             hit.likes--;
             getViewState().setLikeImage(R.drawable.ic_favorite_border_black_48dp);
@@ -90,7 +90,7 @@ public class DetailPresenter extends MvpPresenter<DetailView> {
     }
 
     public void favoritedPhoto() {
-        if(hit.isFavorite){
+        if (hit.isFavorite) {
             hit.isFavorite = false;
             hit.favorites--;
             getViewState().setFavoriteImage(R.drawable.ic_star_border_black_48dp);

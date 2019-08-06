@@ -16,6 +16,4 @@ public class Photo {
     public List<Hit> hits;
 
 
-
-
 }

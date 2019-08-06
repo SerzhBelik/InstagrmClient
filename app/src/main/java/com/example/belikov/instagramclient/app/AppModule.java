@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.belikov.instagramclient.model.GlideLoader;
 import com.example.belikov.instagramclient.model.entity.HitDao;
 import com.example.belikov.instagramclient.model.retrofit.ApiHelper;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -21,19 +22,19 @@ public class AppModule {
 
     @Singleton
     @Provides
-    GlideLoader provideGlideLoader(){
+    GlideLoader provideGlideLoader() {
         return new GlideLoader();
     }
 
     @Singleton
     @Provides
-    ApiHelper provideApiHelper(){
+    ApiHelper provideApiHelper() {
         return new ApiHelper();
     }
 
     @Singleton
     @Provides
-    HitDao provideHitDao(){
+    HitDao provideHitDao() {
         return App.getAppDatabase().hitDao();
     }
 

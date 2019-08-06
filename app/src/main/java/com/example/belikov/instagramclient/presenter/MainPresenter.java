@@ -1,9 +1,7 @@
 package com.example.belikov.instagramclient.presenter;
 
 import android.util.Log;
-import io.reactivex.Single;
-import io.reactivex.SingleOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.belikov.instagramclient.model.entity.Hit;
@@ -12,9 +10,15 @@ import com.example.belikov.instagramclient.model.entity.Photo;
 import com.example.belikov.instagramclient.model.retrofit.ApiHelper;
 import com.example.belikov.instagramclient.view.IViewHolder;
 import com.example.belikov.instagramclient.view.MainView;
+
 import java.util.List;
+
 import javax.inject.Inject;
+
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -26,7 +30,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     @Inject
     HitDao hitDao;
     private List<Hit> hitList;
-    private static  final String TAG = "Main presenter";
+    private static final String TAG = "Main presenter";
     private RecyclerMainPresenter recyclerMain;
 
     public MainPresenter() {
@@ -35,21 +39,21 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     }
 
-            @Override
-        protected void onFirstViewAttach() {
-            getAllPhoto();
-        }
+    @Override
+    protected void onFirstViewAttach() {
+        getAllPhoto();
+    }
 
     public void getAllPhoto() {
         Disposable disposable = hitDao.getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(hits -> {
-                    if (hits.size() == 0){
+                    if (hits.size() == 0) {
                         Log.d(TAG, "hits == 0");
                         getPhotoFromJson();
                     } else {
                         Log.d(TAG, "hits != 0");
                         getPhotoFromeDatabase();
-                        }
+                    }
                 });
 
     }
@@ -58,20 +62,20 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
         Disposable disposable = hitDao.getAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(hits -> {
-                   hitList = hits;
-                   Log.d(TAG, "from DB");
-                   getViewState().updateRecyclerView(hitList.size());
+                    hitList = hits;
+                    Log.d(TAG, "from DB");
+                    getViewState().updateRecyclerView(hitList.size());
                 });
     }
 
 
     public void getPhotoFromJson() {
 //        Log.d(TAG, "!!!");
-                Observable<Photo> single = apiHelper.requestServer();
+        Observable<Photo> single = apiHelper.requestServer();
         Disposable disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(photos -> {
             Log.d(TAG, "hit list " + photos.hits.size());
             hitList = photos.hits;
-            Single<Long> single1= insertIntoDB();
+            Single<Long> single1 = insertIntoDB();
             single1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe(l -> {
                         Log.d(TAG, "insert " + l + " elements");
@@ -91,7 +95,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         }).subscribeOn(Schedulers.io());
     }
 
-    private class RecyclerMainPresenter implements IRecyclerMainPresenter{
+    private class RecyclerMainPresenter implements IRecyclerMainPresenter {
 
         @Override
         public void bindView(IViewHolder holder) {
@@ -106,13 +110,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
             return 0;
         }
 
-        public void onCardClick(int pos){
+        public void onCardClick(int pos) {
             Log.d("Presenter", "" + pos);
             getViewState().getUrlPos(pos);
         }
     }
 
-    public RecyclerMainPresenter getRecyclerMainPresenter(){
+    public RecyclerMainPresenter getRecyclerMainPresenter() {
         return recyclerMain;
     }
 

@@ -9,5 +9,8 @@ import retrofit2.http.Query;
 
 public interface IApiService {
     @GET("api")
+    Observable<Photo> getPhotoWhithKeyWord(@Query("key") String key, @Query("q") String keyword);
+
+    @GET("api")
     Observable<Photo> getPhoto(@Query("key") String key);
 }

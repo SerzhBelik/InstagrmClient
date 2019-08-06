@@ -2,13 +2,9 @@ package com.example.belikov.instagramclient.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -48,7 +44,7 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
     DetailPresenter presenter;
 
     @ProvidePresenter
-    public DetailPresenter providePresenter(){
+    public DetailPresenter providePresenter() {
         return new DetailPresenter();
     }
 
@@ -104,17 +100,17 @@ public class DetailActivity extends MvpAppCompatActivity implements DetailView {
     }
 
 
-    public DetailView getView(){
+    public DetailView getView() {
         return this;
     }
 
     @OnClick(R.id.likePhoto)
-    public void likedPhoto(){
+    public void likedPhoto() {
         presenter.likedPhoto();
     }
 
     @OnClick(R.id.favoritePhoto)
-    public void favoritedPhoto(){
+    public void favoritedPhoto() {
         presenter.favoritedPhoto();
     }
 
